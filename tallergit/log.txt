@@ -1,0 +1,172 @@
+DELL@DESKTOP-I3JT7HG MINGW64 ~
+$ git init tallergit
+Initialized empty Git repository in C:/Users/DELL/tallergit/.git/
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~
+$ git config --global user.name "santiago rendon"
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~
+$ ^[[200~git config --global user.email "email@estudiante.com"
+bash: $'\E[200~git': command not found
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~
+$ git config --global user.email "rendon.santiago@correounivalle.edu.co"
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~
+$ cd tallergit
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git checkout -b feature
+Switched to a new branch 'feature'
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ echo "Texto inicial" > archivo.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git add archivo.txt
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git commit -m "Commit inicial"
+[feature (root-commit) 1de60f4] Commit inicial
+ 1 file changed, 1 insertion(+)
+ create mode 100644 archivo.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ echo "Texto agregado en feature" >> archivo.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git commit -am "Segundo commit en feature"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[feature 197b0be] Segundo commit en feature
+ 1 file changed, 1 insertion(+)
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ echo "Texto agregado en feature" >> archivo.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git commit -am "Tercer commit en feature"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[feature da49f89] Tercer commit en feature
+ 1 file changed, 1 insertion(+)
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git checkout -b master
+Switched to a new branch 'master'
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git merge feature
+Already up to date.
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git reset --hard HEAD~1
+HEAD is now at 197b0be Segundo commit en feature
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git rebase feature
+Successfully rebased and updated refs/heads/master.
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git checkout -b hotfix
+Switched to a new branch 'hotfix'
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (hotfix)
+$ echo "Corrección urgente" >> archivo.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (hotfix)
+$ git commit -am "Hotfix"
+warning: in the working copy of 'archivo.txt', LF will be replaced by CRLF the next time Git touches it
+[hotfix e28a76e] Hotfix
+ 1 file changed, 1 insertion(+)
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (hotfix)
+$ git checkout master
+Switched to branch 'master'
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git cherry-pick hotfix
+[master 9b4186a] Hotfix
+ Date: Sun Oct 6 23:41:00 2024 -0500
+ 1 file changed, 1 insertion(+)
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$  git reflog
+9b4186a (HEAD -> master) HEAD@{0}: cherry-pick: Hotfix
+da49f89 (feature) HEAD@{1}: checkout: moving from hotfix to master
+e28a76e (hotfix) HEAD@{2}: commit: Hotfix
+da49f89 (feature) HEAD@{3}: checkout: moving from master to hotfix
+da49f89 (feature) HEAD@{4}: rebase (finish): returning to refs/heads/master
+da49f89 (feature) HEAD@{5}: rebase (start): checkout feature
+197b0be HEAD@{6}: reset: moving to HEAD~1
+da49f89 (feature) HEAD@{7}: checkout: moving from feature to master
+da49f89 (feature) HEAD@{8}: commit: Tercer commit en feature
+197b0be HEAD@{9}: commit: Segundo commit en feature
+1de60f4 HEAD@{10}: commit (initial): Commit inicial
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git checkout feature
+Switched to branch 'feature'
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ echo "Cambio en feature" > conflicto.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git commit -am "Cambio en feature"
+On branch feature
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        conflicto.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the next time Git touches it
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git commit -am "Cambio en feature"
+[feature 887df08] Cambio en feature
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (feature)
+$ git checkout master
+Switched to branch 'master'
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ echo "Cambio en master" > conflicto.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git commit -am "Cambio en master"
+On branch master
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+        conflicto.txt
+
+nothing added to commit but untracked files present (use "git add" to track)
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git add conflicto.txt
+warning: in the working copy of 'conflicto.txt', LF will be replaced by CRLF the next time Git touches it
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git commit -am "Cambio en master"
+[master 4af4a12] Cambio en master
+ 1 file changed, 1 insertion(+)
+ create mode 100644 conflicto.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$ git merge feature
+Auto-merging conflicto.txt
+CONFLICT (add/add): Merge conflict in conflicto.txt
+Automatic merge failed; fix conflicts and then commit the result.
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master|MERGING)
+$ git add conflicto.txt
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master|MERGING)
+$ git commit -am "terminado conflicto"
+[master 81af16f] terminado conflicto
+
+DELL@DESKTOP-I3JT7HG MINGW64 ~/tallergit (master)
+$
